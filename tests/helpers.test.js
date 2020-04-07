@@ -1,4 +1,3 @@
-'use strict';
 import EstimatorHelper from './../src/helpers';
 
 describe("EstimatorHelper", () => {

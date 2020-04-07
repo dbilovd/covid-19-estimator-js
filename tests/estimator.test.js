@@ -1,4 +1,3 @@
-'use strict';
 import estimator from './../src/estimator'
 
 let baseData = {
