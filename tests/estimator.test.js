@@ -68,4 +68,22 @@ describe("Estimator", () => {
     expect(response.severeImpact.hasOwnProperty("infectionsByRequestedTime")).toBe(true);
     expect(response.severeImpact.infectionsByRequestedTime).toBe(estimatedInfectedSevere);
   });
+
+  it("returns an estimated number of infected persons in number of months", () => {
+    let currentlyInfected = baseData.reportedCases * 10;
+    let currentlyInfectedSevere = baseData.reportedCases * 50;
+
+    baseData.timeToElapse = 1;
+    baseData.periodType = "months";
+    let increaseFactor = 10;
+    let estimatedInfected = currentlyInfected * Math.pow(2, increaseFactor);
+    let estimatedInfectedSevere = currentlyInfectedSevere * Math.pow(2, increaseFactor);
+
+    let response = estimator(baseData);
+
+    expect(response.impact.hasOwnProperty("infectionsByRequestedTime")).toBe(true);
+    expect(response.impact.infectionsByRequestedTime).toBe(estimatedInfected);
+    expect(response.severeImpact.hasOwnProperty("infectionsByRequestedTime")).toBe(true);
+    expect(response.severeImpact.infectionsByRequestedTime).toBe(estimatedInfectedSevere);
+  });
 });
