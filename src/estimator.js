@@ -18,7 +18,11 @@ const covid19ImpactEstimator = (data) => {
   const currentlyInfected = calculateCurrentlyInfected(data.reportedCases);
   const currentlyInfectedSevere = calculateCurrentlyInfected(data.reportedCases, true);
 
-  const numberOfDays = Helpers.getTimeElapsedInDays(28, 'days');
+  const numberOfDays = Helpers.getTimeElapsedInDays(
+    data.timeToElapse, 
+    data.periodType
+  );
+  
   const infectionsByRequestedTime = calculateEstimatedInfectionsByDays(
     currentlyInfected,
     numberOfDays

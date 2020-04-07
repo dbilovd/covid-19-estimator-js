@@ -37,8 +37,27 @@ describe("Estimator", () => {
     let currentlyInfected = baseData.reportedCases * 10;
     let currentlyInfectedSevere = baseData.reportedCases * 50;
 
-    let numberOfDays = 28;
-    let increaseFactor = Math.floor(numberOfDays / 3);
+    baseData.timeToElapse = 28;
+    baseData.periodType = "days";
+    let increaseFactor = 9;
+    let estimatedInfected = currentlyInfected * Math.pow(2, increaseFactor);
+    let estimatedInfectedSevere = currentlyInfectedSevere * Math.pow(2, increaseFactor);
+
+    let response = estimator(baseData);
+
+    expect(response.impact.hasOwnProperty("infectionsByRequestedTime")).toBe(true);
+    expect(response.impact.infectionsByRequestedTime).toBe(estimatedInfected);
+    expect(response.severeImpact.hasOwnProperty("infectionsByRequestedTime")).toBe(true);
+    expect(response.severeImpact.infectionsByRequestedTime).toBe(estimatedInfectedSevere);
+  });
+
+  it("returns an estimated number of infected persons in number of weeks", () => {
+    let currentlyInfected = baseData.reportedCases * 10;
+    let currentlyInfectedSevere = baseData.reportedCases * 50;
+
+    baseData.timeToElapse = 4;
+    baseData.periodType = "weeks";
+    let increaseFactor = 9;
     let estimatedInfected = currentlyInfected * Math.pow(2, increaseFactor);
     let estimatedInfectedSevere = currentlyInfectedSevere * Math.pow(2, increaseFactor);
 
