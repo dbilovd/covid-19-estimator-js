@@ -1,5 +1,4 @@
 import estimator from '../src/estimator';
-import helpers from '../src/helpers';
 
 const baseData = {
   region: {
