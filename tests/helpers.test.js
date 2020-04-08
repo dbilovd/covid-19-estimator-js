@@ -56,4 +56,39 @@ describe('EstimatorHelper', () => {
       expect(availableBeds).toBe(-5);
     });
   });
+
+  describe('getCasesForICUByRequestedTime', () => {
+    it('returns 5% of infections by Requested time', () => {
+      const infections = 100;
+      expect(
+        EstimatorHelper.getCasesForICUByRequestedTime(infections)
+      ).toBe(5);
+    });
+  });
+
+  describe('getCasesForVentilatorsByRequestedTime', () => {
+    it('returns 2% of infections by Requested time', () => {
+      const infections = 100;
+      expect(
+        EstimatorHelper.getCasesForVentilatorsByRequestedTime(infections)
+      ).toBe(2);
+    });
+  });
+
+  describe('getLossToEconomy', () => {
+    it('returns the amount lost using the formula (infections) * earningPopulation * averageIncome * days', () => {
+      const infections = 100;
+      const population = 0.5;
+      const income = 1;
+      const days = 30;
+
+      const expected = infections * population * income * days;
+
+      expect(
+        EstimatorHelper.getLossToEconomy(
+          infections, population, income, days
+        )
+      ).toBe(expected);
+    });
+  });
 });

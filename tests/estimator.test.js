@@ -1,4 +1,5 @@
 import estimator from '../src/estimator';
+import helpers from '../src/helpers';
 
 const baseData = {
   region: {
@@ -118,5 +119,37 @@ describe('Estimator', () => {
 
     expect(response.impact.hospitalBedsByRequestedTime).toBe(hospitalBedAvailable);
     expect(response.severeImpact.hospitalBedsByRequestedTime).toBe(hospitalBedAvailableSevere);
+  });
+
+  it.only('returns total of beds available in hospitals', () => {
+    const currentlyInfected = baseData.reportedCases * 10;
+    const currentlyInfectedSevere = baseData.reportedCases * 50;
+
+    const icuCases = currentlyInfected * 0.05;
+    const icuCasesSevere = currentlyInfectedSevere * 0.05;
+
+    const ventilatorCases = currentlyInfected * 0.02;
+    const ventilatorCasesSevere = currentlyInfectedSevere * 0.02;
+
+    const lossToEconomy = currentlyInfected * baseData.region.avgDailyIncomePopulation
+      * baseData.region.avgDailyIncomeInUSD * 30;
+    const lossToEconomySevere = currentlyInfectedSevere * baseData.region.avgDailyIncomePopulation
+      * baseData.region.avgDailyIncomeInUSD * 30;
+
+
+    baseData.timeToElapse = 30;
+    baseData.periodType = 'days';
+    const response = estimator(baseData);
+
+    expect(response.impact.casesForICUByRequestedTime).toBe(icuCases);
+    expect(response.severeImpact.casesForICUByRequestedTime).toBe(icuCasesSevere);
+
+    expect(response.impact.casesForVentilatorsByRequestedTime)
+      .toBe(ventilatorCases);
+    expect(response.severeImpact.casesForVentilatorsByRequestedTime)
+      .toBe(ventilatorCasesSevere);
+
+    expect(response.impact.dollarsInFlight).toBe(lossToEconomy);
+    expect(response.severeImpact.dollarsInFlight).toBe(lossToEconomySevere);
   });
 });
