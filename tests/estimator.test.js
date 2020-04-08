@@ -1,89 +1,122 @@
-import estimator from './../src/estimator'
+import estimator from '../src/estimator';
 
-let baseData = {
+const baseData = {
   region: {
-    name: "Africa",
-    avgAge: 19.7, avgDailyIncomeInUSD: 5, avgDailyIncomePopulation: 0.71
+    name: 'Africa',
+    avgAge: 19.7,
+    avgDailyIncomeInUSD: 5,
+    avgDailyIncomePopulation: 0.71
   },
-  periodType: "days",
+  periodType: 'days',
   timeToElapse: 58,
   reportedCases: 674,
   population: 66622705,
   totalHospitalBeds: 1380614
-}
+};
 
-describe("Estimator", () => {
-  it("returns data formatted to match specification", () => {
-    let response = estimator(baseData);
+describe('Estimator', () => {
+  it('returns data formatted to match specification', () => {
+    const response = estimator(baseData);
 
-    expect(response.hasOwnProperty('data')).toBe(true);
     expect(response.data).toBe(baseData);
-    expect(response.hasOwnProperty('impact')).toBe(true);
-    expect(response.hasOwnProperty('severeImpact')).toBe(true);
   });
 
-  it("can calculates and returns currently infected persons", () => {
-    let currentlyInfected = baseData.reportedCases * 10;
-    let currentlyInfectedSevere = baseData.reportedCases * 50;
-    let response = estimator(baseData);
+  it('can calculates and returns currently infected persons', () => {
+    const currentlyInfected = baseData.reportedCases * 10;
+    const currentlyInfectedSevere = baseData.reportedCases * 50;
+    const response = estimator(baseData);
 
-    expect(response.impact.hasOwnProperty("currentlyInfected")).toBe(true);
     expect(response.impact.currentlyInfected).toBe(currentlyInfected);
-    expect(response.severeImpact.hasOwnProperty("currentlyInfected")).toBe(true);
     expect(response.severeImpact.currentlyInfected).toBe(currentlyInfectedSevere);
   });
 
-  it("returns an estimated number of infected persons in number of days provided (28)", () => {
-    let currentlyInfected = baseData.reportedCases * 10;
-    let currentlyInfectedSevere = baseData.reportedCases * 50;
+  it('returns an estimated number of infected persons in number of days provided (28)', () => {
+    const currentlyInfected = baseData.reportedCases * 10;
+    const currentlyInfectedSevere = baseData.reportedCases * 50;
 
     baseData.timeToElapse = 28;
-    baseData.periodType = "days";
-    let increaseFactor = 9;
-    let estimatedInfected = currentlyInfected * Math.pow(2, increaseFactor);
-    let estimatedInfectedSevere = currentlyInfectedSevere * Math.pow(2, increaseFactor);
+    baseData.periodType = 'days';
+    const increaseFactor = 9;
+    const estimatedInfected = currentlyInfected * (2 ** increaseFactor);
+    const estimatedInfectedSevere = currentlyInfectedSevere * (2 ** increaseFactor);
 
-    let response = estimator(baseData);
+    const response = estimator(baseData);
 
-    expect(response.impact.hasOwnProperty("infectionsByRequestedTime")).toBe(true);
     expect(response.impact.infectionsByRequestedTime).toBe(estimatedInfected);
-    expect(response.severeImpact.hasOwnProperty("infectionsByRequestedTime")).toBe(true);
     expect(response.severeImpact.infectionsByRequestedTime).toBe(estimatedInfectedSevere);
   });
 
-  it("returns an estimated number of infected persons in number of weeks", () => {
-    let currentlyInfected = baseData.reportedCases * 10;
-    let currentlyInfectedSevere = baseData.reportedCases * 50;
+  it('returns an estimated number of infected persons in number of weeks', () => {
+    const currentlyInfected = baseData.reportedCases * 10;
+    const currentlyInfectedSevere = baseData.reportedCases * 50;
 
     baseData.timeToElapse = 4;
-    baseData.periodType = "weeks";
-    let increaseFactor = 9;
-    let estimatedInfected = currentlyInfected * Math.pow(2, increaseFactor);
-    let estimatedInfectedSevere = currentlyInfectedSevere * Math.pow(2, increaseFactor);
+    baseData.periodType = 'weeks';
+    const increaseFactor = 9;
+    const estimatedInfected = currentlyInfected * (2 ** increaseFactor);
+    const estimatedInfectedSevere = currentlyInfectedSevere * (2 ** increaseFactor);
 
-    let response = estimator(baseData);
+    const response = estimator(baseData);
 
-    expect(response.impact.hasOwnProperty("infectionsByRequestedTime")).toBe(true);
     expect(response.impact.infectionsByRequestedTime).toBe(estimatedInfected);
-    expect(response.severeImpact.hasOwnProperty("infectionsByRequestedTime")).toBe(true);
     expect(response.severeImpact.infectionsByRequestedTime).toBe(estimatedInfectedSevere);
   });
 
-  it("returns an estimated number of infected persons in number of months", () => {
-    let currentlyInfected = baseData.reportedCases * 10;
-    let currentlyInfectedSevere = baseData.reportedCases * 50;
+  it('returns an estimated number of infected persons in number of months', () => {
+    const currentlyInfected = baseData.reportedCases * 10;
+    const currentlyInfectedSevere = baseData.reportedCases * 50;
 
     baseData.timeToElapse = 1;
-    baseData.periodType = "months";
-    let increaseFactor = 10;
-    let estimatedInfected = currentlyInfected * Math.pow(2, increaseFactor);
-    let estimatedInfectedSevere = currentlyInfectedSevere * Math.pow(2, increaseFactor);
+    baseData.periodType = 'months';
+    const increaseFactor = 10;
+    const estimatedInfected = currentlyInfected * (2 ** increaseFactor);
+    const estimatedInfectedSevere = currentlyInfectedSevere * (2 ** increaseFactor);
 
-    let response = estimator(baseData);
+    const response = estimator(baseData);
 
-    expect(response.impact.hasOwnProperty("infectionsByRequestedTime")).toBe(true);
     expect(response.impact.infectionsByRequestedTime).toBe(estimatedInfected);
-    expect(response.severeImpact.hasOwnProperty("infectionsByRequestedTime")).toBe(true);
     expect(response.severeImpact.infectionsByRequestedTime).toBe(estimatedInfectedSevere);
+  });
+
+  it('returns an number severe cases to hospitalise', () => {
+    const currentlyInfected = baseData.reportedCases * 10;
+    const currentlyInfectedSevere = baseData.reportedCases * 50;
+
+    baseData.timeToElapse = 1;
+    baseData.periodType = 'months';
+    const increaseFactor = 10;
+    const estimatedInfected = currentlyInfected * (2 ** increaseFactor);
+    const estimatedInfectedSevere = currentlyInfectedSevere * (2 ** increaseFactor);
+
+    const severeCases = estimatedInfected * 0.15;
+    const severeCasesSevere = estimatedInfectedSevere * 0.15;
+
+    const response = estimator(baseData);
+
+    expect(response.impact.severeCasesByRequestedTime).toBe(severeCases);
+    expect(response.severeImpact.severeCasesByRequestedTime).toBe(severeCasesSevere);
+  });
+
+  it.only('returns total of beds available in hospitals', () => {
+    const currentlyInfected = baseData.reportedCases * 10;
+    const currentlyInfectedSevere = baseData.reportedCases * 50;
+
+    baseData.timeToElapse = 1;
+    baseData.periodType = 'week';
+    baseData.totalHospitalBeds = 10000;
+    const increaseFactor = 2;
+    const estimatedInfected = currentlyInfected * (2 ** increaseFactor);
+    const estimatedInfectedSevere = currentlyInfectedSevere * (2 ** increaseFactor);
+
+    const severeCases = estimatedInfected * 0.15;
+    const severeCasesSevere = estimatedInfectedSevere * 0.15;
+
+    const hospitalBedAvailable = (baseData.totalHospitalBeds * 0.35) - severeCases;
+    const hospitalBedAvailableSevere = (baseData.totalHospitalBeds * 0.35) - severeCasesSevere;
+
+    const response = estimator(baseData);
+
+    expect(response.impact.hospitalBedsByRequestedTime).toBe(hospitalBedAvailable);
+    expect(response.severeImpact.hospitalBedsByRequestedTime).toBe(hospitalBedAvailableSevere);
   });
 });

@@ -32,15 +32,36 @@ const covid19ImpactEstimator = (data) => {
     numberOfDays
   );
 
+  const severeCasesByRequestedTime = Helpers.getSevereCasesByRequestedTime(
+    infectionsByRequestedTime
+  );
+  const severeCasesByRequestedTimeSevere = Helpers.getSevereCasesByRequestedTime(
+    infectionsByRequestedTimeSevere
+  );
+
+  const hospitalBedsByRequestedTime = Helpers.getTotalAvailableBeds(
+    data.totalHospitalBeds,
+    severeCasesByRequestedTime
+  );
+
+  const hospitalBedsByRequestedTimeSevere = Helpers.getTotalAvailableBeds(
+    data.totalHospitalBeds,
+    severeCasesByRequestedTimeSevere
+  );
+
   const response = {
     data,
     impact: {
       currentlyInfected,
-      infectionsByRequestedTime
+      infectionsByRequestedTime,
+      severeCasesByRequestedTime,
+      hospitalBedsByRequestedTime
     },
     severeImpact: {
       currentlyInfected: currentlyInfectedSevere,
-      infectionsByRequestedTime: infectionsByRequestedTimeSevere
+      infectionsByRequestedTime: infectionsByRequestedTimeSevere,
+      severeCasesByRequestedTime: severeCasesByRequestedTimeSevere,
+      hospitalBedsByRequestedTime: hospitalBedsByRequestedTimeSevere
     }
   };
 
