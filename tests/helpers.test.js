@@ -91,4 +91,20 @@ describe('EstimatorHelper', () => {
       ).toBe(expected);
     });
   });
+
+  describe('getCurrentEstimatedInfections', () => {
+    it('returns 10x of reported cases', () => {
+      const reportedCases = 10;
+      expect(
+        EstimatorHelper.getCurrentEstimatedInfections(reportedCases)
+      ).toBe(100);
+    });
+
+    it('returns 50x of reported severe cases', () => {
+      const reportedCases = 10;
+      expect(
+        EstimatorHelper.getCurrentEstimatedInfections(reportedCases, true)
+      ).toBe(500);
+    });
+  });
 });

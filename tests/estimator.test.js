@@ -25,13 +25,17 @@ describe('Estimator', () => {
     expect(response.data).toBe(baseData);
   });
 
-  it('can calculates and returns currently infected persons', () => {
+  it('calculates and returns currently infected persons', () => {
     const currentlyInfected = baseData.reportedCases * 10;
     const currentlyInfectedSevere = baseData.reportedCases * 50;
     const response = estimator(baseData);
 
-    expect(response.impact.currentlyInfected).toBe(Math.floor(currentlyInfected));
-    expect(response.severeImpact.currentlyInfected).toBe(Math.floor(currentlyInfectedSevere));
+    expect(response.impact.currentlyInfected).toBe(
+      Math.floor(currentlyInfected)
+    );
+    expect(response.severeImpact.currentlyInfected).toBe(
+      Math.floor(currentlyInfectedSevere)
+    );
   });
 
   it('returns an estimated number of infected persons in number of days provided (28)', () => {
@@ -63,7 +67,9 @@ describe('Estimator', () => {
     const response = estimator(baseData);
 
     expect(response.impact.infectionsByRequestedTime).toBe(Math.floor(estimatedInfected));
-    expect(response.severeImpact.infectionsByRequestedTime).toBe(Math.floor(estimatedInfectedSevere));
+    expect(response.severeImpact.infectionsByRequestedTime).toBe(
+      Math.floor(estimatedInfectedSevere)
+    );
   });
 
   it('returns an estimated number of infected persons in number of months', () => {
@@ -79,7 +85,9 @@ describe('Estimator', () => {
     const response = estimator(baseData);
 
     expect(response.impact.infectionsByRequestedTime).toBe(Math.floor(estimatedInfected));
-    expect(response.severeImpact.infectionsByRequestedTime).toBe(Math.floor(estimatedInfectedSevere));
+    expect(response.severeImpact.infectionsByRequestedTime).toBe(
+      Math.floor(estimatedInfectedSevere)
+    );
   });
 
   it('returns an number severe cases to hospitalise', () => {
@@ -101,7 +109,7 @@ describe('Estimator', () => {
     expect(response.severeImpact.severeCasesByRequestedTime).toBe(Math.floor(severeCasesSevere));
   });
 
-  it.only('returns total of beds available in hospitals', () => {
+  it('returns total of beds available in hospitals', () => {
     const currentlyInfected = baseData.reportedCases * 10;
     const currentlyInfectedSevere = baseData.reportedCases * 50;
 
@@ -121,10 +129,12 @@ describe('Estimator', () => {
     const response = estimator(baseData);
 
     expect(response.impact.hospitalBedsByRequestedTime).toBe(Math.floor(hospitalBedAvailable));
-    expect(response.severeImpact.hospitalBedsByRequestedTime).toBe(Math.floor(hospitalBedAvailableSevere));
+    expect(response.severeImpact.hospitalBedsByRequestedTime).toBe(
+      Math.floor(hospitalBedAvailableSevere)
+    );
   });
 
-  it.only('returns total of beds available in hospitals', () => {
+  it('returns total of beds available in hospitals', () => {
     const currentlyInfected = baseData.reportedCases * 10;
     const currentlyInfectedSevere = baseData.reportedCases * 50;
 

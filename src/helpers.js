@@ -1,3 +1,6 @@
+const CURRENTLY_INFECTED_FACTOR = 10;
+const CURRENTLY_INFECTED_SEVERE_FACTOR = 50;
+
 const getTimeElapsedInDays = (duration, quantity) => {
   switch (quantity) {
     case 'weeks':
@@ -15,6 +18,12 @@ const getTimeElapsedInDays = (duration, quantity) => {
   }
 };
 
+const getCurrentEstimatedInfections = (cases, severe) => {
+  const factor = severe ? CURRENTLY_INFECTED_SEVERE_FACTOR : CURRENTLY_INFECTED_FACTOR;
+
+  return cases * factor;
+};
+
 const getSevereCasesByRequestedTime = (infections) => infections * 0.15;
 
 const getTotalAvailableBeds = (totalBeds, cases) => (totalBeds * 0.35) - cases;
@@ -29,6 +38,7 @@ const getLossToEconomy = (infections, population, income, days) => {
 };
 
 export default {
+  getCurrentEstimatedInfections,
   getTimeElapsedInDays,
   getSevereCasesByRequestedTime,
   getTotalAvailableBeds,
