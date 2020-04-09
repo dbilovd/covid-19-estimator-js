@@ -130,9 +130,11 @@ describe('Estimator', () => {
     const ventilatorCases = currentlyInfected * 0.02;
     const ventilatorCasesSevere = currentlyInfectedSevere * 0.02;
 
-    const lossToEconomy = currentlyInfected * baseData.region.avgDailyIncomePopulation
+    const lossToEconomy = currentlyInfected
+      * baseData.region.avgDailyIncomePopulation * baseData.population
       * baseData.region.avgDailyIncomeInUSD * 30;
-    const lossToEconomySevere = currentlyInfectedSevere * baseData.region.avgDailyIncomePopulation
+    const lossToEconomySevere = currentlyInfectedSevere
+      * baseData.region.avgDailyIncomePopulation * baseData.population
       * baseData.region.avgDailyIncomeInUSD * 30;
 
 
