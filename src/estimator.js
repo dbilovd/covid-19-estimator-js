@@ -67,14 +67,14 @@ const covid19ImpactEstimator = (data) => {
 
   const dollarsInFlight = Helpers.getLossToEconomy(
     infectionsByRequestedTime,
-    (data.region.avgDailyIncomePopulation / 100),
+    data.region.avgDailyIncomePopulation,
     data.region.avgDailyIncomeInUSD,
     numberOfDays
   );
 
   const dollarsInFlightSevere = Helpers.getLossToEconomy(
     infectionsByRequestedTime,
-    (data.region.avgDailyIncomePopulation / 100),
+    data.region.avgDailyIncomePopulation,
     data.region.avgDailyIncomeInUSD,
     numberOfDays
   );

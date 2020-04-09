@@ -33,7 +33,7 @@ const getCasesForICUByRequestedTime = (infections) => (infections * 0.05);
 const getCasesForVentilatorsByRequestedTime = (infections) => (infections * 0.02);
 
 const getLossToEconomy = (infections, population, income, days) => {
-  const amount = infections * population * income * days;
+  const amount = (infections * population * income) / days;
   return amount;
 };
 
