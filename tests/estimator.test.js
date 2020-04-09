@@ -154,7 +154,7 @@ describe('Estimator', () => {
     expect(response.severeImpact.casesForVentilatorsByRequestedTime)
       .toBe(Math.floor(ventilatorCasesSevere));
 
-    expect(response.impact.dollarsInFlight).toBe(lossToEconomy);
-    expect(response.severeImpact.dollarsInFlight).toBe(lossToEconomySevere);
+    expect(response.impact.dollarsInFlight).toBe(lossToEconomy.toFixed(2));
+    expect(response.severeImpact.dollarsInFlight).toBe(lossToEconomySevere.toFixed(2));
   });
 });
