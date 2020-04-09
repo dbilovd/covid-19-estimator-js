@@ -143,17 +143,24 @@ describe('Estimator', () => {
     const currentlyInfected = baseData.reportedCases * 10;
     const currentlyInfectedSevere = baseData.reportedCases * 50;
 
-    const icuCases = currentlyInfected * 0.05;
-    const icuCasesSevere = currentlyInfectedSevere * 0.05;
+    baseData.timeToElapse = 28;
+    baseData.periodType = 'days';
+    baseData.totalHospitalBeds = 10000;
+    const increaseFactor = Math.floor(baseData.timeToElapse / 3);
+    const estimatedInfected = currentlyInfected * (2 ** increaseFactor);
+    const estimatedInfectedSevere = currentlyInfectedSevere * (2 ** increaseFactor);
 
-    const ventilatorCases = currentlyInfected * 0.02;
-    const ventilatorCasesSevere = currentlyInfectedSevere * 0.02;
+    const icuCases = estimatedInfected * 0.05;
+    const icuCasesSevere = estimatedInfectedSevere * 0.05;
 
-    const lossToEconomy = currentlyInfected
-      * baseData.region.avgDailyIncomePopulation * baseData.population
+    const ventilatorCases = estimatedInfected * 0.02;
+    const ventilatorCasesSevere = estimatedInfectedSevere * 0.02;
+
+    const lossToEconomy = estimatedInfected
+      * baseData.region.avgDailyIncomePopulation
       * baseData.region.avgDailyIncomeInUSD * baseData.timeToElapse;
-    const lossToEconomySevere = currentlyInfectedSevere
-      * baseData.region.avgDailyIncomePopulation * baseData.population
+    const lossToEconomySevere = estimatedInfectedSevere
+      * baseData.region.avgDailyIncomePopulation
       * baseData.region.avgDailyIncomeInUSD * baseData.timeToElapse;
 
     const response = estimator(baseData);
@@ -166,7 +173,11 @@ describe('Estimator', () => {
     expect(response.severeImpact.casesForVentilatorsByRequestedTime)
       .toBe(Math.floor(ventilatorCasesSevere));
 
-    expect(response.impact.dollarsInFlight).toBe(lossToEconomy.toFixed(2));
-    expect(response.severeImpact.dollarsInFlight).toBe(lossToEconomySevere.toFixed(2));
+    expect(response.impact.dollarsInFlight).toBe(
+      Number(parseFloat(lossToEconomy).toFixed(2))
+    );
+    expect(response.severeImpact.dollarsInFlight).toBe(
+      Number(parseFloat(lossToEconomySevere).toFixed(2))
+    );
   });
 });
