@@ -55,14 +55,14 @@ const covid19ImpactEstimator = (data) => {
     infectionsByRequestedTime
   );
   const casesForICUByRequestedTimeSevere = Helpers.getCasesForICUByRequestedTime(
-    infectionsByRequestedTimeSevere
+    infectionsByRequestedTime
   );
 
   const casesForVentilatorsByRequestedTime = Helpers.getCasesForVentilatorsByRequestedTime(
     infectionsByRequestedTime
   );
   const casesForVentilatorsByRequestedTimeSevere = Helpers.getCasesForVentilatorsByRequestedTime(
-    infectionsByRequestedTimeSevere
+    infectionsByRequestedTime
   );
 
   const dollarsInFlight = Helpers.getLossToEconomy(
@@ -72,7 +72,7 @@ const covid19ImpactEstimator = (data) => {
     numberOfDays
   );
   const dollarsInFlightSevere = Helpers.getLossToEconomy(
-    infectionsByRequestedTime,
+    infectionsByRequestedTimeSevere,
     data.region.avgDailyIncomePopulation,
     data.region.avgDailyIncomeInUSD,
     numberOfDays
