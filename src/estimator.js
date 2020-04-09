@@ -84,11 +84,11 @@ const covid19ImpactEstimator = (data) => {
       currentlyInfected: formatDataForResponse(currentlyInfected),
       infectionsByRequestedTime: formatDataForResponse(infectionsByRequestedTime),
       severeCasesByRequestedTime: formatDataForResponse(severeCasesByRequestedTime),
-      hospitalBedsByRequestedTime,
+      // hospitalBedsByRequestedTime,
       // hospitalBedsByRequestedTime: formatDataForResponse(hospitalBedsByRequestedTime),
-      // hospitalBedsByRequestedTime: hospitalBedsByRequestedTime < 0
-      //   ? Math.round(hospitalBedsByRequestedTime)
-      //   : formatDataForResponse(hospitalBedsByRequestedTime),
+      hospitalBedsByRequestedTime: hospitalBedsByRequestedTime < 0
+        ? Math.round(hospitalBedsByRequestedTime)
+        : formatDataForResponse(hospitalBedsByRequestedTime),
       casesForICUByRequestedTime: formatDataForResponse(casesForICUByRequestedTime),
       casesForVentilatorsByRequestedTime: formatDataForResponse(
         casesForVentilatorsByRequestedTime
