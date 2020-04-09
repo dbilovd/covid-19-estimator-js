@@ -85,10 +85,10 @@ const covid19ImpactEstimator = (data) => {
       infectionsByRequestedTime: formatDataForResponse(infectionsByRequestedTime),
       severeCasesByRequestedTime: formatDataForResponse(severeCasesByRequestedTime),
       // hospitalBedsByRequestedTime,
-      // hospitalBedsByRequestedTime: formatDataForResponse(hospitalBedsByRequestedTime),
-      hospitalBedsByRequestedTime: hospitalBedsByRequestedTime < 0
-        ? Math.round(hospitalBedsByRequestedTime)
-        : formatDataForResponse(hospitalBedsByRequestedTime),
+      hospitalBedsByRequestedTime: parseInt(hospitalBedsByRequestedTime, 10),
+      // hospitalBedsByRequestedTime: hospitalBedsByRequestedTime < 0
+      //   ? Math.round(hospitalBedsByRequestedTime)
+      //   : formatDataForResponse(hospitalBedsByRequestedTime),
       casesForICUByRequestedTime: formatDataForResponse(casesForICUByRequestedTime),
       casesForVentilatorsByRequestedTime: formatDataForResponse(
         casesForVentilatorsByRequestedTime
@@ -100,10 +100,10 @@ const covid19ImpactEstimator = (data) => {
       infectionsByRequestedTime: formatDataForResponse(infectionsByRequestedTimeSevere),
       severeCasesByRequestedTime: formatDataForResponse(severeCasesByRequestedTimeSevere),
       // hospitalBedsByRequestedTime: hospitalBedsByRequestedTimeSevere,
-      // hospitalBedsByRequestedTime: formatDataForResponse(hospitalBedsByRequestedTimeSevere),
-      hospitalBedsByRequestedTime: hospitalBedsByRequestedTimeSevere < 0
-        ? Math.round(hospitalBedsByRequestedTimeSevere)
-        : formatDataForResponse(hospitalBedsByRequestedTimeSevere),
+      hospitalBedsByRequestedTime: parseInt(hospitalBedsByRequestedTimeSevere, 10),
+      // hospitalBedsByRequestedTime: hospitalBedsByRequestedTimeSevere < 0
+      //   ? Math.round(hospitalBedsByRequestedTimeSevere)
+      //   : formatDataForResponse(hospitalBedsByRequestedTimeSevere),
       casesForICUByRequestedTime: formatDataForResponse(casesForICUByRequestedTimeSevere),
       casesForVentilatorsByRequestedTime: formatDataForResponse(
         casesForVentilatorsByRequestedTimeSevere
