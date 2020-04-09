@@ -90,7 +90,7 @@ const covid19ImpactEstimator = (data) => {
       casesForVentilatorsByRequestedTime: formatDataForResponse(
         casesForVentilatorsByRequestedTime
       ),
-      dollarsInFlight: Number(dollarsInFlight.toFixed(2))
+      dollarsInFlight: formatDataForResponse(dollarsInFlight)
     },
     severeImpact: {
       currentlyInfected: formatDataForResponse(currentlyInfectedSevere),
@@ -101,7 +101,7 @@ const covid19ImpactEstimator = (data) => {
       casesForVentilatorsByRequestedTime: formatDataForResponse(
         casesForVentilatorsByRequestedTimeSevere
       ),
-      dollarsInFlight: Number(dollarsInFlightSevere.toFixed(2))
+      dollarsInFlight: formatDataForResponse(dollarsInFlightSevere)
     }
   };
 
