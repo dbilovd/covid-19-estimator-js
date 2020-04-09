@@ -52,17 +52,17 @@ const covid19ImpactEstimator = (data) => {
   );
 
   const casesForICUByRequestedTime = Helpers.getCasesForICUByRequestedTime(
-    infectionsByRequestedTime
+    infectionsByRequestedTimeSevere
   );
   const casesForICUByRequestedTimeSevere = Helpers.getCasesForICUByRequestedTime(
-    infectionsByRequestedTime
+    infectionsByRequestedTimeSevere
   );
 
   const casesForVentilatorsByRequestedTime = Helpers.getCasesForVentilatorsByRequestedTime(
-    infectionsByRequestedTime
+    infectionsByRequestedTimeSevere
   );
   const casesForVentilatorsByRequestedTimeSevere = Helpers.getCasesForVentilatorsByRequestedTime(
-    infectionsByRequestedTime
+    infectionsByRequestedTimeSevere
   );
 
   const dollarsInFlight = Helpers.getLossToEconomy(
