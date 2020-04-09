@@ -5,7 +5,7 @@ const calculateEstimatedInfectionsByDays = (currentInfections, days) => {
   return currentInfections * (2 ** incrementFactor);
 };
 
-const formatDataForResponse = (data) => Math.floor(data);
+const formatDataForResponse = (data) => parseInt(data, 10);
 
 const covid19ImpactEstimator = (data) => {
   const currentlyInfected = Helpers.getCurrentEstimatedInfections(
@@ -58,12 +58,12 @@ const covid19ImpactEstimator = (data) => {
     infectionsByRequestedTimeSevere
   );
 
-  // const casesForVentilatorsByRequestedTime = Helpers.getCasesForVentilatorsByRequestedTime(
-  //   infectionsByRequestedTime
-  // );
-  // const casesForVentilatorsByRequestedTimeSevere = Helpers.getCasesForVentilatorsByRequestedTime(
-  //   infectionsByRequestedTimeSevere
-  // );
+  const casesForVentilatorsByRequestedTime = Helpers.getCasesForVentilatorsByRequestedTime(
+    infectionsByRequestedTime
+  );
+  const casesForVentilatorsByRequestedTimeSevere = Helpers.getCasesForVentilatorsByRequestedTime(
+    infectionsByRequestedTimeSevere
+  );
 
   const dollarsInFlight = Helpers.getLossToEconomy(
     currentlyInfected,
@@ -86,9 +86,9 @@ const covid19ImpactEstimator = (data) => {
       severeCasesByRequestedTime: formatDataForResponse(severeCasesByRequestedTime),
       hospitalBedsByRequestedTime: parseInt(hospitalBedsByRequestedTime, 10),
       casesForICUByRequestedTime: formatDataForResponse(casesForICUByRequestedTime),
-      // casesForVentilatorsByRequestedTime: formatDataForResponse(
-      //   casesForVentilatorsByRequestedTime
-      // ),
+      casesForVentilatorsByRequestedTime: formatDataForResponse(
+        casesForVentilatorsByRequestedTime
+      ),
       dollarsInFlight: Number(dollarsInFlight.toFixed(2))
     },
     severeImpact: {
@@ -97,9 +97,9 @@ const covid19ImpactEstimator = (data) => {
       severeCasesByRequestedTime: formatDataForResponse(severeCasesByRequestedTimeSevere),
       hospitalBedsByRequestedTime: parseInt(hospitalBedsByRequestedTimeSevere, 10),
       casesForICUByRequestedTime: formatDataForResponse(casesForICUByRequestedTimeSevere),
-      // casesForVentilatorsByRequestedTime: formatDataForResponse(
-      //   casesForVentilatorsByRequestedTimeSevere
-      // ),
+      casesForVentilatorsByRequestedTime: formatDataForResponse(
+        casesForVentilatorsByRequestedTimeSevere
+      ),
       dollarsInFlight: Number(dollarsInFlightSevere.toFixed(2))
     }
   };
