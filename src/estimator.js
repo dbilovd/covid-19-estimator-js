@@ -52,17 +52,17 @@ const covid19ImpactEstimator = (data) => {
   );
 
   const casesForICUByRequestedTime = Helpers.getCasesForICUByRequestedTime(
-    currentlyInfected
+    infectionsByRequestedTime
   );
   const casesForICUByRequestedTimeSevere = Helpers.getCasesForICUByRequestedTime(
-    currentlyInfectedSevere
+    infectionsByRequestedTimeSevere
   );
 
   const casesForVentilatorsByRequestedTime = Helpers.getCasesForVentilatorsByRequestedTime(
-    currentlyInfected
+    infectionsByRequestedTime
   );
   const casesForVentilatorsByRequestedTimeSevere = Helpers.getCasesForVentilatorsByRequestedTime(
-    currentlyInfectedSevere
+    infectionsByRequestedTimeSevere
   );
 
   const dollarsInFlight = Helpers.getLossToEconomy(
@@ -84,11 +84,7 @@ const covid19ImpactEstimator = (data) => {
       currentlyInfected: formatDataForResponse(currentlyInfected),
       infectionsByRequestedTime: formatDataForResponse(infectionsByRequestedTime),
       severeCasesByRequestedTime: formatDataForResponse(severeCasesByRequestedTime),
-      // hospitalBedsByRequestedTime,
       hospitalBedsByRequestedTime: parseInt(hospitalBedsByRequestedTime, 10),
-      // hospitalBedsByRequestedTime: hospitalBedsByRequestedTime < 0
-      //   ? Math.round(hospitalBedsByRequestedTime)
-      //   : formatDataForResponse(hospitalBedsByRequestedTime),
       casesForICUByRequestedTime: formatDataForResponse(casesForICUByRequestedTime),
       casesForVentilatorsByRequestedTime: formatDataForResponse(
         casesForVentilatorsByRequestedTime
@@ -99,11 +95,7 @@ const covid19ImpactEstimator = (data) => {
       currentlyInfected: formatDataForResponse(currentlyInfectedSevere),
       infectionsByRequestedTime: formatDataForResponse(infectionsByRequestedTimeSevere),
       severeCasesByRequestedTime: formatDataForResponse(severeCasesByRequestedTimeSevere),
-      // hospitalBedsByRequestedTime: hospitalBedsByRequestedTimeSevere,
       hospitalBedsByRequestedTime: parseInt(hospitalBedsByRequestedTimeSevere, 10),
-      // hospitalBedsByRequestedTime: hospitalBedsByRequestedTimeSevere < 0
-      //   ? Math.round(hospitalBedsByRequestedTimeSevere)
-      //   : formatDataForResponse(hospitalBedsByRequestedTimeSevere),
       casesForICUByRequestedTime: formatDataForResponse(casesForICUByRequestedTimeSevere),
       casesForVentilatorsByRequestedTime: formatDataForResponse(
         casesForVentilatorsByRequestedTimeSevere
