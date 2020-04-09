@@ -90,5 +90,5 @@ router.route('/api/v1/on-covid-19/logs')
 
 const port = process.env.PORT || 8000;
 server.listen(port, () => {
-  console.log('App started on port: ' + port);
+  // console.log('App started on port: ' + port);
 });
