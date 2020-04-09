@@ -65,47 +65,19 @@ const covid19ImpactEstimator = (data) => {
     infectionsByRequestedTimeSevere
   );
 
-  const dollarsInFlight = {
-    if: infectionsByRequestedTime,
-    di: data.region.avgDailyIncomePopulation,
-    in: data.region.avgDailyIncomeInUSD,
-    dy: numberOfDays,
-    rs: Helpers.getLossToEconomy(
-      infectionsByRequestedTime,
-      data.region.avgDailyIncomePopulation,
-      data.region.avgDailyIncomeInUSD,
-      numberOfDays
-    )
-  };
-  /*
-  Helpers.getLossToEconomy(
+  const dollarsInFlight = Helpers.getLossToEconomy(
     infectionsByRequestedTime,
-    data.region.avgDailyIncomePopulation,
+    (data.region.avgDailyIncomePopulation / 100),
     data.region.avgDailyIncomeInUSD,
     numberOfDays
   );
-  */
 
-  const dollarsInFlightSevere = {
-    if: infectionsByRequestedTime,
-    di: data.region.avgDailyIncomePopulation,
-    in: data.region.avgDailyIncomeInUSD,
-    dy: numberOfDays,
-    rs: Helpers.getLossToEconomy(
-      infectionsByRequestedTimeSevere,
-      data.region.avgDailyIncomePopulation,
-      data.region.avgDailyIncomeInUSD,
-      numberOfDays
-    )
-  };
-  /*
   const dollarsInFlightSevere = Helpers.getLossToEconomy(
     infectionsByRequestedTimeSevere,
-    data.region.avgDailyIncomePopulation,
+    (data.region.avgDailyIncomePopulation / 100),
     data.region.avgDailyIncomeInUSD,
     numberOfDays
   );
-  */
 
   const response = {
     data,
