@@ -86,7 +86,9 @@ const covid19ImpactEstimator = (data) => {
       severeCasesByRequestedTime: formatDataForResponse(severeCasesByRequestedTime),
       hospitalBedsByRequestedTime: formatDataForResponse(hospitalBedsByRequestedTime),
       casesForICUByRequestedTime: formatDataForResponse(casesForICUByRequestedTime),
-      casesForVentilatorsByRequestedTime: formatDataForResponse(casesForVentilatorsByRequestedTime),
+      casesForVentilatorsByRequestedTime: formatDataForResponse(
+        casesForVentilatorsByRequestedTime
+      ),
       dollarsInFlight
     },
     severeImpact: {
@@ -95,7 +97,9 @@ const covid19ImpactEstimator = (data) => {
       severeCasesByRequestedTime: formatDataForResponse(severeCasesByRequestedTimeSevere),
       hospitalBedsByRequestedTime: formatDataForResponse(hospitalBedsByRequestedTimeSevere),
       casesForICUByRequestedTime: formatDataForResponse(casesForICUByRequestedTimeSevere),
-      casesForVentilatorsByRequestedTime: formatDataForResponse(casesForVentilatorsByRequestedTimeSevere),
+      casesForVentilatorsByRequestedTime: formatDataForResponse(
+        casesForVentilatorsByRequestedTimeSevere
+      ),
       dollarsInFlight: dollarsInFlightSevere
     }
   };
