@@ -1,6 +1,7 @@
 import bodyParser from 'body-parser';
 import express from 'express';
 import http from 'http';
+import xml from 'xml-js';
 import covid19ImpactEstimator from '../estimator';
 
 const app = express();
@@ -10,8 +11,8 @@ app.use(bodyParser.json());
 
 const APIController = {
   computeEstimations: (req, res) => {
-    // let responseType = req.params.type;
-    // responseType = responseType === 'xml' ? 'xml' : 'json';
+    let responseType = req.params.type;
+    responseType = responseType === 'xml' ? 'xml' : 'json';
 
     // Validate Request Data
     // ...
@@ -28,6 +29,16 @@ const APIController = {
     };
 
     const estimatedDataset = covid19ImpactEstimator(data);
+
+    if (responseType === 'xml') {
+      res.type('application/xml');
+      const xmlResult = xml.json2xml(estimatedDataset, {
+        compact: true,
+        ignoreComment: true
+      });
+      res.send(xmlResult);
+      return;
+    }
 
     res.json(estimatedDataset);
   }
