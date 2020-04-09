@@ -39,12 +39,12 @@ const covid19ImpactEstimator = (data) => {
 
   const hospitalBedsByRequestedTime = Helpers.getTotalAvailableBeds(
     data.totalHospitalBeds,
-    Math.floor(severeCasesByRequestedTime)
+    severeCasesByRequestedTime
   );
 
   const hospitalBedsByRequestedTimeSevere = Helpers.getTotalAvailableBeds(
     data.totalHospitalBeds,
-    Math.floor(severeCasesByRequestedTimeSevere)
+    severeCasesByRequestedTimeSevere
   );
 
   const casesForICUByRequestedTime = Helpers.getCasesForICUByRequestedTime(
