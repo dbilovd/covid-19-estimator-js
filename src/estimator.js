@@ -14,6 +14,8 @@ const calculateEstimatedInfectionsByDays = (currentInfections, days) => {
   return currentInfections * (2 ** incrementFactor);
 };
 
+const formatDataForResponse = (data) => Math.floor(data);
+
 const covid19ImpactEstimator = (data) => {
   const currentlyInfected = calculateCurrentlyInfected(data.reportedCases);
   const currentlyInfectedSevere = calculateCurrentlyInfected(data.reportedCases, true);
@@ -79,21 +81,21 @@ const covid19ImpactEstimator = (data) => {
   const response = {
     data,
     impact: {
-      currentlyInfected,
-      infectionsByRequestedTime,
-      severeCasesByRequestedTime,
-      hospitalBedsByRequestedTime,
-      casesForICUByRequestedTime,
-      casesForVentilatorsByRequestedTime,
+      currentlyInfected: formatDataForResponse(currentlyInfectedSevere),
+      infectionsByRequestedTime: formatDataForResponse(infectionsByRequestedTime),
+      severeCasesByRequestedTime: formatDataForResponse(severeCasesByRequestedTime),
+      hospitalBedsByRequestedTime: formatDataForResponse(hospitalBedsByRequestedTime),
+      casesForICUByRequestedTime: formatDataForResponse(casesForICUByRequestedTime),
+      casesForVentilatorsByRequestedTime: formatDataForResponse(casesForVentilatorsByRequestedTime),
       dollarsInFlight
     },
     severeImpact: {
-      currentlyInfected: currentlyInfectedSevere,
-      infectionsByRequestedTime: infectionsByRequestedTimeSevere,
-      severeCasesByRequestedTime: severeCasesByRequestedTimeSevere,
-      hospitalBedsByRequestedTime: hospitalBedsByRequestedTimeSevere,
-      casesForICUByRequestedTime: casesForICUByRequestedTimeSevere,
-      casesForVentilatorsByRequestedTime: casesForVentilatorsByRequestedTimeSevere,
+      currentlyInfected: formatDataForResponse(currentlyInfectedSevere),
+      infectionsByRequestedTime: formatDataForResponse(infectionsByRequestedTimeSevere),
+      severeCasesByRequestedTime: formatDataForResponse(severeCasesByRequestedTimeSevere),
+      hospitalBedsByRequestedTime: formatDataForResponse(hospitalBedsByRequestedTimeSevere),
+      casesForICUByRequestedTime: formatDataForResponse(casesForICUByRequestedTimeSevere),
+      casesForVentilatorsByRequestedTime: formatDataForResponse(casesForVentilatorsByRequestedTimeSevere),
       dollarsInFlight: dollarsInFlightSevere
     }
   };

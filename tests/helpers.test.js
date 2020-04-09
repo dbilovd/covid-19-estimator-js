@@ -55,13 +55,6 @@ describe('EstimatorHelper', () => {
       availableBeds = EstimatorHelper.getTotalAvailableBeds(totalBeds, severeCases);
       expect(availableBeds).toBe(-5);
     });
-
-    it.only('returns only an integer since we cannot have a decimal number of beds', () => {
-      const totalBeds = 101;
-      const severeCases = 10;
-      const availableBeds = EstimatorHelper.getTotalAvailableBeds(totalBeds, severeCases);
-      expect(availableBeds).toBe(25);
-    });
   });
 
   describe('getCasesForICUByRequestedTime', () => {

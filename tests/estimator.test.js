@@ -30,8 +30,8 @@ describe('Estimator', () => {
     const currentlyInfectedSevere = baseData.reportedCases * 50;
     const response = estimator(baseData);
 
-    expect(response.impact.currentlyInfected).toBe(currentlyInfected);
-    expect(response.severeImpact.currentlyInfected).toBe(currentlyInfectedSevere);
+    expect(response.impact.currentlyInfected).toBe(Math.floor(currentlyInfected));
+    expect(response.severeImpact.currentlyInfected).toBe(Math.floor(currentlyInfectedSevere));
   });
 
   it('returns an estimated number of infected persons in number of days provided (28)', () => {
@@ -46,8 +46,8 @@ describe('Estimator', () => {
 
     const response = estimator(baseData);
 
-    expect(response.impact.infectionsByRequestedTime).toBe(estimatedInfected);
-    expect(response.severeImpact.infectionsByRequestedTime).toBe(estimatedInfectedSevere);
+    expect(response.impact.infectionsByRequestedTime).toBe(Math.floor(estimatedInfected));
+    expect(response.severeImpact.infectionsByRequestedTime).toBe(Math.floor(estimatedInfectedSevere));
   });
 
   it('returns an estimated number of infected persons in number of weeks', () => {
@@ -62,8 +62,8 @@ describe('Estimator', () => {
 
     const response = estimator(baseData);
 
-    expect(response.impact.infectionsByRequestedTime).toBe(estimatedInfected);
-    expect(response.severeImpact.infectionsByRequestedTime).toBe(estimatedInfectedSevere);
+    expect(response.impact.infectionsByRequestedTime).toBe(Math.floor(estimatedInfected));
+    expect(response.severeImpact.infectionsByRequestedTime).toBe(Math.floor(estimatedInfectedSevere));
   });
 
   it('returns an estimated number of infected persons in number of months', () => {
@@ -78,8 +78,8 @@ describe('Estimator', () => {
 
     const response = estimator(baseData);
 
-    expect(response.impact.infectionsByRequestedTime).toBe(estimatedInfected);
-    expect(response.severeImpact.infectionsByRequestedTime).toBe(estimatedInfectedSevere);
+    expect(response.impact.infectionsByRequestedTime).toBe(Math.floor(estimatedInfected));
+    expect(response.severeImpact.infectionsByRequestedTime).toBe(Math.floor(estimatedInfectedSevere));
   });
 
   it('returns an number severe cases to hospitalise', () => {
@@ -97,8 +97,8 @@ describe('Estimator', () => {
 
     const response = estimator(baseData);
 
-    expect(response.impact.severeCasesByRequestedTime).toBe(severeCases);
-    expect(response.severeImpact.severeCasesByRequestedTime).toBe(severeCasesSevere);
+    expect(response.impact.severeCasesByRequestedTime).toBe(Math.floor(severeCases));
+    expect(response.severeImpact.severeCasesByRequestedTime).toBe(Math.floor(severeCasesSevere));
   });
 
   it.only('returns total of beds available in hospitals', () => {
@@ -120,8 +120,8 @@ describe('Estimator', () => {
 
     const response = estimator(baseData);
 
-    expect(response.impact.hospitalBedsByRequestedTime).toBe(hospitalBedAvailable);
-    expect(response.severeImpact.hospitalBedsByRequestedTime).toBe(hospitalBedAvailableSevere);
+    expect(response.impact.hospitalBedsByRequestedTime).toBe(Math.floor(hospitalBedAvailable));
+    expect(response.severeImpact.hospitalBedsByRequestedTime).toBe(Math.floor(hospitalBedAvailableSevere));
   });
 
   it.only('returns total of beds available in hospitals', () => {
@@ -146,13 +146,13 @@ describe('Estimator', () => {
     baseData.periodType = 'days';
     const response = estimator(baseData);
 
-    expect(response.impact.casesForICUByRequestedTime).toBe(icuCases);
-    expect(response.severeImpact.casesForICUByRequestedTime).toBe(icuCasesSevere);
+    expect(response.impact.casesForICUByRequestedTime).toBe(Math.floor(icuCases));
+    expect(response.severeImpact.casesForICUByRequestedTime).toBe(Math.floor(icuCasesSevere));
 
     expect(response.impact.casesForVentilatorsByRequestedTime)
-      .toBe(ventilatorCases);
+      .toBe(Math.floor(ventilatorCases));
     expect(response.severeImpact.casesForVentilatorsByRequestedTime)
-      .toBe(ventilatorCasesSevere);
+      .toBe(Math.floor(ventilatorCasesSevere));
 
     expect(response.impact.dollarsInFlight).toBe(lossToEconomy);
     expect(response.severeImpact.dollarsInFlight).toBe(lossToEconomySevere);
