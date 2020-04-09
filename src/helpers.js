@@ -26,7 +26,7 @@ const getCurrentEstimatedInfections = (cases, severe) => {
 
 const getSevereCasesByRequestedTime = (infections) => infections * 0.15;
 
-const getTotalAvailableBeds = (totalBeds, cases) => (totalBeds * 0.35) - cases;
+const getTotalAvailableBeds = (totalBeds, cases) => Math.floor(totalBeds * 0.35) - cases;
 
 const getCasesForICUByRequestedTime = (infections) => (infections * 0.05);
 
