@@ -30,11 +30,15 @@ const covid19ImpactEstimator = (data) => {
     numberOfDays
   );
 
-  const severeCasesByRequestedTime = Helpers.getSevereCasesByRequestedTime(
+  let severeCasesByRequestedTime = Helpers.getSevereCasesByRequestedTime(
     infectionsByRequestedTime
   );
-  const severeCasesByRequestedTimeSevere = Helpers.getSevereCasesByRequestedTime(
+  severeCasesByRequestedTime = Math.floor(severeCasesByRequestedTime);
+  let severeCasesByRequestedTimeSevere = Helpers.getSevereCasesByRequestedTime(
     infectionsByRequestedTimeSevere
+  );
+  severeCasesByRequestedTimeSevere = Math.floor(
+    severeCasesByRequestedTimeSevere
   );
 
   const hospitalBedsByRequestedTime = Helpers.getTotalAvailableBeds(
