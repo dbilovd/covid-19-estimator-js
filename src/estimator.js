@@ -74,7 +74,7 @@ const covid19ImpactEstimator = (data) => {
     numberOfDays
   );
   */
- 
+
   const dollarsInFlightSevere = data;
   /*
   const dollarsInFlightSevere = Helpers.getLossToEconomy(
