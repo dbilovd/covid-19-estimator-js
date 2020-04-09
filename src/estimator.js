@@ -80,7 +80,10 @@ const covid19ImpactEstimator = (data) => {
       currentlyInfected: formatDataForResponse(currentlyInfected),
       infectionsByRequestedTime: formatDataForResponse(infectionsByRequestedTime),
       severeCasesByRequestedTime: formatDataForResponse(severeCasesByRequestedTime),
-      hospitalBedsByRequestedTime: formatDataForResponse(hospitalBedsByRequestedTime),
+      // hospitalBedsByRequestedTime: formatDataForResponse(hospitalBedsByRequestedTime),
+      hospitalBedsByRequestedTime: hospitalBedsByRequestedTime < 0
+        ? Math.round(hospitalBedsByRequestedTime)
+        : formatDataForResponse(hospitalBedsByRequestedTime),
       casesForICUByRequestedTime: formatDataForResponse(casesForICUByRequestedTime),
       casesForVentilatorsByRequestedTime: formatDataForResponse(
         casesForVentilatorsByRequestedTime
@@ -91,7 +94,10 @@ const covid19ImpactEstimator = (data) => {
       currentlyInfected: formatDataForResponse(currentlyInfectedSevere),
       infectionsByRequestedTime: formatDataForResponse(infectionsByRequestedTimeSevere),
       severeCasesByRequestedTime: formatDataForResponse(severeCasesByRequestedTimeSevere),
-      hospitalBedsByRequestedTime: formatDataForResponse(hospitalBedsByRequestedTimeSevere),
+      // hospitalBedsByRequestedTime: formatDataForResponse(hospitalBedsByRequestedTimeSevere),
+      hospitalBedsByRequestedTime: hospitalBedsByRequestedTimeSevere < 0
+        ? Math.round(hospitalBedsByRequestedTimeSevere)
+        : formatDataForResponse(hospitalBedsByRequestedTimeSevere),
       casesForICUByRequestedTime: formatDataForResponse(casesForICUByRequestedTimeSevere),
       casesForVentilatorsByRequestedTime: formatDataForResponse(
         casesForVentilatorsByRequestedTimeSevere
