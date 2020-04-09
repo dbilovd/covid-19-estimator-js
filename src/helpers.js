@@ -17,11 +17,11 @@ const getTimeElapsedInDays = (duration, quantity) => {
 
 const getSevereCasesByRequestedTime = (infections) => infections * 0.15;
 
-const getTotalAvailableBeds = (totalBeds, cases) => Math.floor((totalBeds * 0.35)) - cases;
+const getTotalAvailableBeds = (totalBeds, cases) => ((totalBeds * 0.35)) - cases;
 
-const getCasesForICUByRequestedTime = (infections) => Math.floor(infections * 0.05);
+const getCasesForICUByRequestedTime = (infections) => (infections * 0.05);
 
-const getCasesForVentilatorsByRequestedTime = (infections) => Math.floor(infections * 0.02);
+const getCasesForVentilatorsByRequestedTime = (infections) => (infections * 0.02);
 
 const getLossToEconomy = (infections, population, income, days) => {
   const amount = infections * population * income * days;

@@ -1,20 +1,24 @@
 import estimator from '../src/estimator';
 
-const baseData = {
-  region: {
-    name: 'Africa',
-    avgAge: 19.7,
-    avgDailyIncomeInUSD: 5,
-    avgDailyIncomePopulation: 0.71
-  },
-  periodType: 'days',
-  timeToElapse: 58,
-  reportedCases: 674,
-  population: 66622705,
-  totalHospitalBeds: 1380614
-};
+let baseData;
 
 describe('Estimator', () => {
+  beforeEach(() => {
+    baseData = {
+      region: {
+        name: 'Africa',
+        avgAge: 19.7,
+        avgDailyIncomeInUSD: 5,
+        avgDailyIncomePopulation: 0.71
+      },
+      periodType: 'days',
+      timeToElapse: 58,
+      reportedCases: 674,
+      population: 66622705,
+      totalHospitalBeds: 1380614
+    };
+  });
+
   it('returns data formatted to match specification', () => {
     const response = estimator(baseData);
 
@@ -88,8 +92,8 @@ describe('Estimator', () => {
     const estimatedInfected = currentlyInfected * (2 ** increaseFactor);
     const estimatedInfectedSevere = currentlyInfectedSevere * (2 ** increaseFactor);
 
-    const severeCases = Math.floor(estimatedInfected * 0.15);
-    const severeCasesSevere = Math.floor(estimatedInfectedSevere * 0.15);
+    const severeCases = (estimatedInfected * 0.15);
+    const severeCasesSevere = (estimatedInfectedSevere * 0.15);
 
     const response = estimator(baseData);
 
@@ -108,11 +112,11 @@ describe('Estimator', () => {
     const estimatedInfected = currentlyInfected * (2 ** increaseFactor);
     const estimatedInfectedSevere = currentlyInfectedSevere * (2 ** increaseFactor);
 
-    const severeCases = Math.floor(estimatedInfected * 0.15);
-    const severeCasesSevere = Math.floor(estimatedInfectedSevere * 0.15);
+    const severeCases = (estimatedInfected * 0.15);
+    const severeCasesSevere = (estimatedInfectedSevere * 0.15);
 
-    const hospitalBedAvailable = Math.floor(baseData.totalHospitalBeds * 0.35) - severeCases;
-    const hospitalBedAvailableSevere = Math.floor(baseData.totalHospitalBeds * 0.35) - severeCasesSevere;
+    const hospitalBedAvailable = (baseData.totalHospitalBeds * 0.35) - severeCases;
+    const hospitalBedAvailableSevere = (baseData.totalHospitalBeds * 0.35) - severeCasesSevere;
 
     const response = estimator(baseData);
 
@@ -124,11 +128,11 @@ describe('Estimator', () => {
     const currentlyInfected = baseData.reportedCases * 10;
     const currentlyInfectedSevere = baseData.reportedCases * 50;
 
-    const icuCases = Math.floor(currentlyInfected * 0.05);
-    const icuCasesSevere = Math.floor(currentlyInfectedSevere * 0.05);
+    const icuCases = currentlyInfected * 0.05;
+    const icuCasesSevere = currentlyInfectedSevere * 0.05;
 
-    const ventilatorCases = Math.floor(currentlyInfected * 0.02);
-    const ventilatorCasesSevere = Math.floor(currentlyInfectedSevere * 0.02);
+    const ventilatorCases = currentlyInfected * 0.02;
+    const ventilatorCasesSevere = currentlyInfectedSevere * 0.02;
 
     const lossToEconomy = currentlyInfected
       * baseData.region.avgDailyIncomePopulation * baseData.population
