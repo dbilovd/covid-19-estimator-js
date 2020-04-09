@@ -10,8 +10,8 @@ app.use(bodyParser.json());
 
 const APIController = {
   computeEstimations: (req, res) => {
-    let responseType = req.params.type;
-    responseType = responseType === 'xml' ? 'xml' : 'json';
+    // let responseType = req.params.type;
+    // responseType = responseType === 'xml' ? 'xml' : 'json';
 
     // Validate Request Data
     // ...
@@ -48,5 +48,5 @@ router.route('/api/v1/on-covid-19/:type')
 
 const port = process.env.PORT || 8000;
 server.listen(port, () => {
-  console.log('App started on port: ' + port);
+  // console.log('App started on port: ' + port);
 });
