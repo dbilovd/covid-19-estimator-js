@@ -113,28 +113,33 @@ describe('Estimator', () => {
     const currentlyInfected = baseData.reportedCases * 10;
     const currentlyInfectedSevere = baseData.reportedCases * 50;
 
-    baseData.timeToElapse = 1;
-    baseData.periodType = 'week';
+    baseData.timeToElapse = 28;
+    baseData.periodType = 'days';
     baseData.totalHospitalBeds = 10000;
-    const increaseFactor = 2;
+    const increaseFactor = Math.floor(baseData.timeToElapse / 3);
     const estimatedInfected = currentlyInfected * (2 ** increaseFactor);
     const estimatedInfectedSevere = currentlyInfectedSevere * (2 ** increaseFactor);
 
-    const severeCases = (estimatedInfected * 0.15);
-    const severeCasesSevere = (estimatedInfectedSevere * 0.15);
+    const severeCases = Math.floor(estimatedInfected * 0.15);
+    const severeCasesSevere = Math.floor(estimatedInfectedSevere * 0.15);
 
     const hospitalBedAvailable = (baseData.totalHospitalBeds * 0.35) - severeCases;
     const hospitalBedAvailableSevere = (baseData.totalHospitalBeds * 0.35) - severeCasesSevere;
 
     const response = estimator(baseData);
 
-    expect(response.impact.hospitalBedsByRequestedTime).toBe(Math.floor(hospitalBedAvailable));
+    expect(response.impact.hospitalBedsByRequestedTime).toBe(
+      Math.floor(hospitalBedAvailable)
+    );
     expect(response.severeImpact.hospitalBedsByRequestedTime).toBe(
       Math.floor(hospitalBedAvailableSevere)
     );
   });
 
-  it('returns total of beds available in hospitals', () => {
+  it('returns total of ICU, ventilators and impact on economy needed', () => {
+    baseData.timeToElapse = 28;
+    baseData.periodType = 'days';
+
     const currentlyInfected = baseData.reportedCases * 10;
     const currentlyInfectedSevere = baseData.reportedCases * 50;
 
@@ -146,14 +151,11 @@ describe('Estimator', () => {
 
     const lossToEconomy = currentlyInfected
       * baseData.region.avgDailyIncomePopulation * baseData.population
-      * baseData.region.avgDailyIncomeInUSD * 30;
+      * baseData.region.avgDailyIncomeInUSD * baseData.timeToElapse;
     const lossToEconomySevere = currentlyInfectedSevere
       * baseData.region.avgDailyIncomePopulation * baseData.population
-      * baseData.region.avgDailyIncomeInUSD * 30;
+      * baseData.region.avgDailyIncomeInUSD * baseData.timeToElapse;
 
-
-    baseData.timeToElapse = 30;
-    baseData.periodType = 'days';
     const response = estimator(baseData);
 
     expect(response.impact.casesForICUByRequestedTime).toBe(Math.floor(icuCases));
