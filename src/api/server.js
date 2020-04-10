@@ -87,6 +87,10 @@ router.route('/api/v1/on-covid-19/logs')
   .get(
     APIController.displayLogs
   );
+router.route('/logs')
+  .get(
+    APIController.displayLogs
+  );
 
 const port = process.env.PORT || 8000;
 server.listen(port, () => {
