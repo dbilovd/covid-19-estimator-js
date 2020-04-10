@@ -54,12 +54,13 @@ const APIController = {
   },
 
   displayLogs: (req, res) => {
+    // eslint-disable-next-line consistent-return
     fs.readFile('logs.txt', (err, logEntries) => {
       if (err) {
         return false;
       }
 
-      return res.send(logEntries);
+      res.send(logEntries);
     });
   }
 };
