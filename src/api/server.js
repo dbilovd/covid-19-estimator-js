@@ -1,3 +1,4 @@
+import compression from 'compression';
 import bodyParser from 'body-parser';
 import express from 'express';
 import path from 'path';
@@ -9,6 +10,7 @@ import xml from 'xml-js';
 import covid19ImpactEstimator from '../estimator';
 
 const app = express();
+app.use(compression());
 const server = http.createServer(app);
 
 app.use(history());
