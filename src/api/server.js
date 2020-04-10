@@ -60,7 +60,7 @@ const APIController = {
         return false;
       }
 
-      res.send(logEntries);
+      res.send(logEntries.toString());
     });
   }
 };
