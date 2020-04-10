@@ -1,13 +1,17 @@
 import bodyParser from 'body-parser';
 import express from 'express';
+import path from 'path';
 import http from 'http';
 import fs from 'fs';
+import serveStatic from 'serve-static';
+import history from 'connect-history-api-fallback';
 import xml from 'xml-js';
 import covid19ImpactEstimator from '../estimator';
 
 const app = express();
 const server = http.createServer(app);
 
+app.use(history());
 app.use(bodyParser.json());
 
 const logger = (req, res, next) => {
@@ -64,6 +68,8 @@ const APIController = {
     });
   }
 };
+
+app.use(serveStatic(path.join(__dirname, '/../../dist')));
 
 const router = express.Router();
 app.use(router);
