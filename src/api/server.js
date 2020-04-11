@@ -5,7 +5,6 @@ import path from 'path';
 import http from 'http';
 import fs from 'fs';
 import serveStatic from 'serve-static';
-import history from 'connect-history-api-fallback';
 import xml from 'xml-js';
 import covid19ImpactEstimator from '../estimator';
 
@@ -13,7 +12,6 @@ const app = express();
 app.use(compression());
 const server = http.createServer(app);
 
-app.use(history());
 app.use(bodyParser.json());
 
 const logger = (req, res, next) => {
@@ -76,6 +74,10 @@ app.use(serveStatic(path.join(__dirname, '/../../dist')));
 const router = express.Router();
 app.use(router);
 
+router.route('/logs')
+  .get(
+    APIController.displayLogs
+  );
 router.route('/api/v1/on-covid-19')
   .post(
     APIController.computeEstimations
@@ -87,10 +89,6 @@ router.route('/api/v1/on-covid-19/:type')
   );
 
 router.route('/api/v1/on-covid-19/logs')
-  .get(
-    APIController.displayLogs
-  );
-router.route('/logs')
   .get(
     APIController.displayLogs
   );

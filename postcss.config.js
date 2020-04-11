@@ -10,7 +10,8 @@ module.exports = {
     }),
     purgecss({
       content: [
-        './src/**/*.vue'
+        './src/**/*.vue',
+        './dist/**/*.html'
       ],
       defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || []
       // content: ['./layouts/**/*.html', './src/**/*.vue', './src/**/*.jsx'],
