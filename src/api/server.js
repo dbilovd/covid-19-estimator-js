@@ -19,11 +19,13 @@ const logger = (req, res, next) => {
 
   res.on('finish', () => {
     const finishTime = new Date();
-    const timeDiff = finishTime.getMilliseconds() - currenTime.getMilliseconds();
-    const entry = [req.method, req.originalUrl, res.statusCode, `${timeDiff} ms`]
+    let timeDiff = finishTime.getMilliseconds() - currenTime.getMilliseconds();
+    timeDiff = `${timeDiff}`.padStart(2, '0');
+
+    const entry = [req.method, req.originalUrl, res.statusCode, `${timeDiff}ms`]
       .join('\t\t');
 
-    fs.appendFile('logs.txt', `\n${entry}`, (err) => {
+    fs.appendFile('logs.txt', `${entry}\n`, (err) => {
       if (err) {
         return false;
       }
@@ -58,13 +60,15 @@ const APIController = {
   },
 
   displayLogs: (req, res) => {
-    // eslint-disable-next-line consistent-return
     fs.readFile('logs.txt', (err, logEntries) => {
       if (err) {
         return false;
       }
 
-      res.send(logEntries.toString());
+      res.set({
+        'Content-Type': 'text/plain'
+      });
+      return res.send(logEntries.toString());
     });
   }
 };
@@ -93,7 +97,7 @@ router.route('/api/v1/on-covid-19/logs')
     APIController.displayLogs
   );
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 8010;
 server.listen(port, () => {
   // console.log('App started on port: ' + port);
 });
